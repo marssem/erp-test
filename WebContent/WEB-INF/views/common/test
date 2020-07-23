@@ -1,0 +1,41 @@
+<%
+request.setAttribute("str", "123");
+request.setAttribute("str1", "test1");
+request.setAttribute("list", null);
+%>
+<c:if test="${list == null}">
+list 없네요
+</c:if>
+<c:if test="${empty list}">
+리스트가 비어 있네요.
+</c:if>
+<br>
+<br>
+<br>
+<c:if test="${str eq '123' && str1 == 'test'}">
+str은 변수는 아니고 attribute키인데 무튼 123 맞음
+str1은 test맞음
+</c:if>
+
+<c:if test="${str ne '123'}">
+str은 변수는 아니고 attribute키인데 무튼 123 아님
+</c:if>
+<br>
+<br>
+<c:choose>
+	<c:when test="${str=='1231'}">
+	str은 123입니다
+	</c:when>
+</c:choose>
+<c:choose>
+	<c:when test="${str=='test1'}">
+	str1은 test1입니다
+	</c:when>
+	<c:otherwise>
+		str은 123이 아니고 str1도 test1이 아닙니다.
+	</c:otherwise>
+</c:choose>
+
+<br>
+
+
