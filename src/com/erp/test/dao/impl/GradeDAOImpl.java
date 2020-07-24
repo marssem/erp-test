@@ -22,9 +22,8 @@ public class GradeDAOImpl implements GradeDAO {
 		try {
 			con = Conn.open();
 			String sql = "insert into grade(grd_no, grd_name, grd_desc)";
-			sql += " values(?, ?, ?)";
+			sql += " values((select max(grd_no)+1 from grade), ?, ?)";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, grade.get("grd_no").toString());
 			ps.setString(2, grade.get("grd_name").toString());
 			ps.setString(3, grade.get("grd_desc").toString());
 			result = ps.executeUpdate();
@@ -42,8 +41,7 @@ public class GradeDAOImpl implements GradeDAO {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-		}
-		
+		}		
 		return result;
 	}
 
@@ -54,15 +52,14 @@ public class GradeDAOImpl implements GradeDAO {
 		int result = 0;
 		try {
 			con = Conn.open();
-			String sql = "update Grade ";
-			sql = "set grd_name=?, grd_desc=? where grd_no=?";
+			String sql = "update grade ";
+			sql += " set grd_name=?, grd_desc=? where grd_no=? ";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, grade.get("grd_name").toString());
-			ps.setString(2, grade.get("grd_desc").toString());
-			ps.setString(3, grade.get("grd_no").toString());
-			con.commit();
+			ps.setObject(1, grade.get("grd_name"));
+			ps.setObject(2, grade.get("grd_desc"));
+			ps.setObject(3, grade.get("grd_no"));
 			result =  ps.executeUpdate();
-			
+			con.commit();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -82,18 +79,17 @@ public class GradeDAOImpl implements GradeDAO {
 	}
 
 	@Override
-	public int deleteGrade(int gNum) {
+	public int deleteGrade(Map<String, Object> grade) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
 		try {
 			con = Conn.open();
-			String sql = "delete grade ";
-			sql += "where grd_no=?";
+			String sql = "delete from grade where grd_no=?";
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, gNum);
+			ps.setObject(1, grade.get("grd_no"));
 			result = ps.executeUpdate();
-			
+			con.commit();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -112,22 +108,24 @@ public class GradeDAOImpl implements GradeDAO {
 	}
 
 	@Override
-	public Map<String, Object> selectGrade(int gNum) {
+	public Map<String, Object> selectGrade(Map<String, Object> grade) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Map<String, Object> s = new HashMap<>();
+		
 		try {
 			con = Conn.open();
 			String sql = "select * from grade ";
-			sql += "where grd_name=?";
+			sql += "where grd_no=?";
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, gNum);
+			ps.setObject(1, grade.get("grd_no"));
 			rs = ps.executeQuery();
-			if(rs!=null) {
+			if(rs.next()) {
+				Map<String, Object> s = new HashMap<>();
 				s.put("grd_no", rs.getInt("grd_no"));
 				s.put("grd_name",  rs.getString("grd_name"));
 				s.put("grd_desc",  rs.getString("grd_desc"));
+				return s;
 			}
 				
 		}catch(SQLException e){
@@ -149,7 +147,7 @@ public class GradeDAOImpl implements GradeDAO {
 				e.printStackTrace();
 			}
 		}
-		return s;
+		return null;
 	}
 
 	@Override
@@ -192,5 +190,10 @@ public class GradeDAOImpl implements GradeDAO {
 		}
 		return gradeList;
 		}
-
+public static void main(String[] args) {
+	GradeDAO g = new GradeDAOImpl();
+	Map<String, Object> grade = new HashMap<>();
+	
+	
+}
 }

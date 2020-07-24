@@ -12,40 +12,28 @@ public class GradeServiceImpl implements GradeService {
 	private GradeDAO gDAO = new GradeDAOImpl();
 	@Override
 	public Map<String, Object> insertGrade(Map<String, Object> grade) {
-		int g = gDAO.insertGrade(grade);
-		 Map<String, Object> rMap = new HashMap<>();
-		 rMap.put("msg", "입력 완료됨");
-		 if(g != 1) {
-			 rMap.put("msg", "입력 안됨");
-		 }
+		Map<String, Object> rMap = new HashMap<>();
+		rMap.put("msg", gDAO.insertGrade(grade)==1?"입력성공":"입력실패");
 		return rMap;
 	}
 
 	@Override
 	public Map<String, Object> updateGrade(Map<String, Object> grade) {
-		int g = gDAO.updateGrade(grade);
-		 Map<String, Object> rMap = new HashMap<>();
-		 rMap.put("msg", "갱신 완료됨");
-		 if(g != 1) {
-			 rMap.put("msg", "갱신 안됨");
-		 }
+		Map<String, Object> rMap = new HashMap<>();
+		rMap.put("msg", gDAO.updateGrade(grade)==1?"수정성공":"수정실패");
 		return rMap;
 	}
 
 	@Override
-	public Map<String, Object> deleteGrade(int gNum) {
-		 Map<String, Object> rMap = new HashMap<>();
-		 rMap.put("msg", "삭제 완료됨");
-		 if(gNum != 1) {
-			 rMap.put("msg", "삭제 안됨");
-		 }
+	public Map<String, Object> deleteGrade(Map<String, Object> grade) {
+		Map<String, Object> rMap = new HashMap<>();
+		rMap.put("msg", gDAO.deleteGrade(grade)==1?"삭제성공":"삭제실패");
 		return rMap;
 	}
 
 	@Override
-	public Map<String, Object> selectGrade(int gNum) {
-		 
-		return gDAO.selectGrade(gNum);
+	public Map<String, Object> selectGrade(Map<String, Object> grade) {
+		return gDAO.selectGrade(grade);
 	}
 
 	@Override
