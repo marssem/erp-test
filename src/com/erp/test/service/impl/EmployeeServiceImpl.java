@@ -9,26 +9,26 @@ import com.erp.test.dao.impl.EmployeeDAOImpl;
 import com.erp.test.service.EmployeeService;
 
 public class EmployeeServiceImpl implements EmployeeService {
-	EmployeeDAO empDAO = new EmployeeDAOImpl();
+	private EmployeeDAO empDAO = new EmployeeDAOImpl();
 	@Override
 	public Map<String, Object> insertEmployee(Map<String, Object> emp) {
 	 Map<String, Object> eml = new HashMap<>();
 	 int r = empDAO.insertEmployee(emp);
-	 eml.put("msg", r==1?"입력 완료":"입력 실패");
+	 eml.put("msg", r==1?"입사 완료":"입사 실패");
 		return eml;
 	}
 
 	@Override
 	public Map<String, Object> updateEmployee(Map<String, Object> emp) {
 		 Map<String, Object> eml = new HashMap<>();
-		 eml.put("msg", empDAO.updateEmployee(emp)==1?"입력 완료":"입력 실패");
+		 eml.put("msg", empDAO.updateEmployee(emp)==1?"갱신 완료":"갱신 실패");
 			return eml;
 	}
 
 	@Override
 	public Map<String, Object> deleteEmployee(Map<String, Object> emp) {
 		 Map<String, Object> eml = new HashMap<>();
-		 eml.put("msg", empDAO.updateEmployee(emp)==1?"입력 완료":"입력 실패");
+		 eml.put("msg", empDAO.updateEmployee(emp)==1?"퇴사 완료":"퇴사 실패");
 			return eml;
 	}
 
