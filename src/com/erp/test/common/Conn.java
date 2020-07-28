@@ -20,7 +20,10 @@ public class Conn {
 	}
 	public static Connection open() {
 		try {
-			return DriverManager.getConnection(URI,ID,PWD);
+			Connection con;
+			con = DriverManager.getConnection(URI,ID,PWD);
+			con.setAutoCommit(false);
+			return con;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
