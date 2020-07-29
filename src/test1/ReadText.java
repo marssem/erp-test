@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,5 +44,19 @@ public static List<Map<String,String>> pharse(String str){
 		}
 	}
 	return null;
+}
+public static List<Map<String,String>> kkk(String key, String str){
+	List<Map<String,String>> list = new ArrayList<>();
+	String[] keys = key.split(",");
+	String[] strs = null;
+	for(int i=0;i<strs.length;i++) {
+		String[] values = strs[i].split("\\|");
+		Map<String, String> map = new HashMap<>();
+		for(int j=0;j<keys.length;j++) {
+			map.put(keys[j], values[j]);
+		}
+		list.add(map);
+	}
+	return list;
 }
 }
