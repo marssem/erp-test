@@ -90,7 +90,7 @@ public class AddressTest {
 		if(path.isDirectory()) {
 			File[] files = path.listFiles();	
 			for(File file:files) {
-				if(!file.isDirectory() && file.getName().indexOf("build_")==0) {
+				if(!file.isDirectory() && file.getName().indexOf("build_sejong")==0) {
 					int cnt = at.insertAddress(file);
 					s += file.getName();
 					System.out.println(file.getName() + ", 입력갯수 : " + cnt);
