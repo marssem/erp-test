@@ -31,7 +31,7 @@ public class SelectAddressServlet extends HttpServlet {
 				request.setAttribute("dongList", dongList);
 			}
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/views/div");
+		RequestDispatcher rd = request.getRequestDispatcher("/views/div/div");
 		rd.forward(request, response);
 	}
 
