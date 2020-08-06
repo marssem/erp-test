@@ -5,17 +5,40 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div id="rDiv"></div>
 <script>
+var lottos = [];
+for(var i=0;i<6;i++){
+	var lotto = Math.floor(M)
+	if(lottos.indexOf(lotto)!=-1){
+		i--;
+		continue;
+	}
+	lottos.push(lotto);
+}
+lottos.sort();
+document.write(lottos);
+
+
+
 
 var nums = [];
 	for(var i=0;i<6;i++){
-		nums.push(Math.round(Math.random()*45+1));
-		for(var j=0-1;j>0;j--){
-			nums[]
+		nums[i] = (Math.round(Math.random()*5+1));
+		for(var j=i-1;j>=0;j--){
+			if(nums[i]==nums[j]){
+				i--;
+			}
 		}
 	}
+var str = '<table border="1"> <tr>';
+	for(var i=0;i<6;i++){
+		str += '<td>'+nums[i]+'</td>';
+	}
+	str += '</tr>';
 
-document.write(nums);
+
+	document.querySelector('#rDiv').innerHTML = str;
 </script>
 </body>
 </html>

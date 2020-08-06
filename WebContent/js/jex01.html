@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/js/jquery-3.5.1.js"></script>
+<style >
+td{
+	text-align:center;
+	cursor:pointer;
+	width:40px;
+	height:40px;
+}
+td:hover{
+	background-color:black;
+	color:white;
+	font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+<input type="number" id="maxNum">
+<button>start</button>
+<div id="rDiv"></div>
+<script >
+function btnClick(){
+	var maxNum = $('#maxNum').val();
+	var html = '<table border="1">';	
+	for(var i=0;i<=maxNum*maxNum;i++){
+		html += '<tr>';
+		for(var j=0;j<maxNum;j++){
+			i++
+			html += '<td>'+i+'</td>';
+		}
+		html +='</tr>';
+		i--;
+	}
+	html += '</table>'; 
+	$('#rDiv').html(html);
+	
+	$('#rDiv');
+	var num = Math.floor(Math.random()*maxNum*maxNum)+1;
+	$('td').click(function(){
+		if(this.innerText==num){
+			alert('찾았다!!');
+		}else{
+			$(this).text('x');
+		}
+	});
+	
+	
+	
+
+	
+	
+	
+	
+	/* var tdObjs = $('td');
+	var nums = Math.floor(Math.random()*(maxNum*maxNum)+1);
+	for(var i=0;i<maxNum*maxNum;i++){
+		tdObjs[i] = function(){
+			if(tdObjs[i]==nums){
+				alert('찾았다!!');
+			}else{
+				$(this).text('x');
+			}
+		}
+		alert(tdObjs[1]);
+	} */
+	
+}
+$('button').click(btnClick);
+</script>
+</body>
+</html>
